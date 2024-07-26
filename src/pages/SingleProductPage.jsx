@@ -87,7 +87,7 @@ const SingleProductPage = () => {
                 type: "addToCart",
                 payload: { order, ...currentItem },
               });
-              navigate("/");
+              navigate("/cart");
             }}
           >
             Add to cart
