@@ -1,5 +1,6 @@
 export const initialState = {
   cart: [],
+  currentItem: {},
   products: [],
   isLoading: false,
   cartAmount: 0,
@@ -17,6 +18,10 @@ export const reducer = (state, action) => {
       return { ...state, isLoading: false };
     case "ready":
       return { ...state, isLoading: false, products: action.payload };
+    case "getSingleProduct":
+      return { ...state, isLoading: false, currentItem: action.payload };
+    case "addToCart":
+      return { ...state, cart: [...state.cart, { ...action.payload }] };
     default:
       return state;
   }

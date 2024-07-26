@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Loader from "./Loader";
 import { useStateValue } from "../context/CartProvider";
 import { BASE_URL } from "../utils/constant";
 import Product from "./Product";
@@ -8,7 +9,6 @@ const Products = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log("run");
       try {
         dispatch({ type: "startFetching" });
 
@@ -19,7 +19,6 @@ const Products = () => {
 
         dispatch({ type: "ready", payload: data });
       } catch (error) {
-        console.log("Error");
         dispatch({ type: "error" });
       }
     };
@@ -28,7 +27,7 @@ const Products = () => {
   }, [dispatch]);
 
   if (state.isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (state.error) {

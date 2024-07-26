@@ -23,7 +23,7 @@ const Product = ({ product }) => {
         </div>
       </div>
       <Link
-        to={"/"}
+        to={`${product.id}`}
         className='bg-slate-950 block text-slate-100 uppercase text-center py-2 hover:bg-slate-900'
       >
         Details
