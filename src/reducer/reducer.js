@@ -21,11 +21,26 @@ export const reducer = (state, action) => {
     case "getSingleProduct":
       return { ...state, isLoading: false, currentItem: action.payload };
     case "addToCart":
+      if (state.cart.map((item) => item.id).includes(action.payload.id)) {
+        const { id, order } = action.payload;
+
+        return {
+          ...state,
+          cart: [
+            ...state.cart.map((item) =>
+              item.id !== id ? item : { ...item, order: item.order + order }
+            ),
+          ],
+        };
+      }
       return { ...state, cart: [...state.cart, { ...action.payload }] };
     case "delete":
       console.log(action.payload);
-      const currCart = state.cart.filter((item) => item.id !== action.payload);
-      return { ...state, cart: currCart };
+
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== action.payload),
+      };
     default:
       throw new Error("This action is unknown");
   }
